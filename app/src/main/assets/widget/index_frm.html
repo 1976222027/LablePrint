@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>WinA</title>
+    <link rel="stylesheet" type="text/css" href="css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="css/box.css"/>
+    <script type="text/javascript" src="script/public.js"></script>
+    <style>
+    	p{
+    		color:#999;
+    		padding:5px;
+    	}
+
+
+    </style>
+    <script type="text/javascript">
+		var uzmoduledemo = null;
+		apiready = function(){
+	    	uzmoduledemo = api.require('moduleLabelPrinter');
+	    }
+	    function requestPermission(){
+	      uzmoduledemo.requestPermission(function(ret){
+	         alert(JSON.stringify(ret));
+	        });
+	   }
+	    function ScanBluetooth(){
+	      uzmoduledemo.ScanBluetooth(function(ret){
+	         alert(JSON.stringify(ret));
+	        });
+	   }
+		function printerUsb(){
+	        uzmoduledemo.printerUsb(function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		function initPrint(){
+	        uzmoduledemo.initPrint({
+	        type:'usb',//bluetooth 、usb
+	        size:11,//0代表是50X30标签；1代表50X30价签 10代表68*38标签；11代表68x38黑白价签 ，12代表68x38彩色价签
+	        address:'DC:1D:30:85:A0:29'
+	        <!--address:'00:11:22:33:44:55'-->
+	        <!--address:'DC:0D:30:71:8A:65'-->
+	        },function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		function disconnect(){
+	        uzmoduledemo.disconnect(function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+			function backPaper(){
+	        uzmoduledemo.backPaper(function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		function usbPrintee(){
+			openContent('index_frm2.html', 'index_frm2');
+		}
+		function printerBill(){
+		uzmoduledemo.printBill({
+			data: [
+	      {"rowtype":"printTitle","text":"超市\n","alignment":"center"},
+	      {"rowtype":"printText","text":"\n"},
+	      {"rowtype":"printText","text":"销售单号 : 20181013113216947\n","alignment":"left"},
+	      {"rowtype":"printText","text":"交易时间 : 2018-10-13 11:32:16\n","alignment":"left"},
+	      {"rowtype":"printText","text":"收 银  员 : shouyin\n","alignment":"left"},
+	      {"rowtype":"printText","text":"--------------------------------\n","alignment":"left"},
+	      {"rowtype":"printText","text":"中国·卡姿兰 (Carslan)光感矿物两用粉饼11g(6930324132429)\n"},
+	      {"rowtype":"printColumnsText","colsTextArr":["129.00",1,"129.00"],"colsWidthArr":[18,18,18],"colsAlign":[0,0,0]},
+	      {"rowtype":"printText","text":"--------------------------------\n","alignment":"left"},
+	      {"rowtype":"printText","text":"\n"},
+	      {"rowtype":"printText","text":"总　　计 : 129\n","alignment":"left"},
+	      {"rowtype":"printQRCode","data":"https://www.baidu.com","alignment":"center"},
+	      {"rowtype":"printText","text":"\n"},
+	      {"rowtype":"printText","text":"欢迎下次光临！\n","alignment":"center"},
+	      ]
+			 },function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		function printerLabel(){
+	        uzmoduledemo.printerLabel({
+	        data : [
+                  <!--{-->
+                   <!--barCode:'1232424323',-->
+	               <!--name:'汉朝新零售',-->
+	               <!--price:2.39,-->
+	               <!--vipPrice:1.48,-->
+	               <!--labeldate:'2018-09-07',-->
+	               <!--endnotes:'这是标签尾注的声明',-->
+	               <!--number:1-->
+                <!--},-->
+                {
+                   barCode:'123456789012345678',
+	               name:'洗衣机 海尔ABC&88-run-36524',
+	               spec:'1*8',unit:'箱',level:'一等',place:'天津',
+	               price:7999,
+	               shopName:'北国电器',
+	               vipPrice:99.99,
+	               labeldate:'2018-09-07',
+	               endnotes:'9.9尾注',
+	               number:1
+                }
+                ]
+	        },function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+
+
+    </script>
+</head>
+<body>
+<div id="wrap">
+    <br id="main">
+        <br>
+        <div class="clickbtn" tapmode="active" onclick="requestPermission()">获取打印机设备权限</div>
+        <div class="clickbtn" tapmode="active" onclick="printerUsb()">获取打印机设备信息</div>
+        <div class="clickbtn" tapmode="active" onclick="initPrint()">初始化</div>
+        <div class="clickbtn" tapmode="active" onclick="printerLabel()">打印标签</div>
+        <div class="clickbtn" tapmode="active" onclick="backPaper()">退纸</div><br/>
+        <div class="clickbtn" tapmode="active" onclick="printerBill()">打印小票</div>
+        <div class="clickbtn" tapmode="active" onclick="disconnect()">断开蓝牙连接</div>
+        <div class="clickbtn" tapmode="active" onclick="ScanBluetooth()">扫描蓝牙设备</div>
+        <div class='itemtitle'>小票</div>
+        <div class="clickbtn" tapmode="active" onclick="usbPrintee()">小票打印页</div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: mylableprint-debug:@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/mylableprint-debug.aar/0794135099686b077992f08b9b80a0fa/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/mylableprint-debug.aar/0794135099686b077992f08b9b80a0fa/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/mylableprint-debug.aar/0794135099686b077992f08b9b80a0fa/jars/libs/core-3.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

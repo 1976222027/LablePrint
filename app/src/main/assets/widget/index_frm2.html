@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>WinA</title>
+    <link rel="stylesheet" type="text/css" href="css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="css/box.css"/>
+    <script type="text/javascript" src="script/public.js"></script>
+    <style>
+    	p{
+    		color:#999;
+    		padding:5px;
+    	}
+
+    </style>
+    <script type="text/javascript">
+		var uzmoduledemo = null;
+		apiready = function(){
+	    	uzmoduledemo = api.require('modulePrinter');
+	    }
+		function requestPermission(){
+	        uzmoduledemo.requestPermission(function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		function initPrint(){
+			uzmoduledemo.initPrint({
+			type:'wifi',//usb-Xprinter使用芯烨的小票机  usb使用佳博的
+            isinstruction:2,//1  指令    2 非指令
+            isbox:true,//是否打开钱箱
+	    	mPrinterIp:'192.168.1.125',
+	    	port:9100,
+			},function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+		function printData(){
+		uzmoduledemo.printData({
+			data: [
+	      {"rowtype":"printTitle","text":"超市\n","alignment":"center"},
+
+	      {"rowtype":"printText","text":"\n"},
+	      {"rowtype":"printText","text":"销售单号 : 20181013113216947\n","alignment":"left"},
+	      {"rowtype":"printText","text":"交易时间 : 2018-10-13 11:32:16\n","alignment":"left"},
+	      {"rowtype":"printText","text":"收 银  员 : shouyin\n","alignment":"left"},
+	      {"rowtype":"printText","text":"--------------------------------\n","alignment":"left"},
+	      {"rowtype":"printText","text":"中国·卡姿兰 (Carslan)光感矿物两用粉饼11g(6930324132429)\n"},
+	      {"rowtype":"printColumnsText","colsTextArr":["129.00",1,"129.00"],"colsWidthArr":[18,18,18],"colsAlign":[0,0,0]},
+          {"rowtype":"printText","text":"中国·卡姿兰 \n"},
+	      {"rowtype":"printColumnsText","colsTextArr":["129.00",1,"129.00"],"colsWidthArr":[18,18,18],"colsAlign":[0,0,0]},
+	      {"rowtype":"printText","text":"------------------------------------------------\n","alignment":"left"},
+	      {"rowtype":"printText","text":"\n"},
+	      {"rowtype":"printText","text":"总　　计 : 129\n","alignment":"left"},
+{"rowtype":"printQRCode","data":"https://www.baidu.com","alignment":"center"},
+	     {"rowtype":"printText","text":"\n"},
+	      {"rowtype":"printText","text":"欢迎下次光临！\n","alignment":"center"},
+	      {"rowtype":"printText","text":"欢迎下次光临2！\n","alignment":"center"}
+	      ]
+			 },function(ret, err){
+	        	alert(JSON.stringify(ret));
+	        });
+		}
+	//打开钱箱
+     function openCashBox(){
+            uzmoduledemo.openCashBox(function(ret){
+	         alert(JSON.stringify(ret));
+	   });
+	   }
+	    function openLablee(){
+    openContent('index_frm.html', 'index_frm');
+	   }
+
+
+    </script>
+</head>
+<body>
+<div id="wrap">
+    <div id="main">
+        <br>
+        <div class="clickbtn" tapmode="active" onclick="requestPermission()">获取权限</div>
+        <div class="clickbtn" tapmode="active" onclick="initPrint()">初始化</div>
+        <div class="clickbtn" tapmode="active" onclick="printData()">打印数据</div>
+        <div class="clickbtn" tapmode="active" onclick="openCashBox()">打开钱箱</div>
+        <div class='itemtitle'>标签页</div>
+        <div class="clickbtn" tapmode="active" onclick="openLablee()">打开标签页</div>
+    </div>
+</div>
+</body>
+</html>

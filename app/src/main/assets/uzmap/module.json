@@ -1,0 +1,11 @@
+{
+  "modules": [
+    {
+      "name": "moduleLabelPrinter",
+      "class": "com.apicloud.mylableprint.LablePrint"
+    } ,{
+      "name":"modulePrinter",
+      "class":"com.apicloud.myusbprint.UsbPrint"
+    }
+  ]
+}
